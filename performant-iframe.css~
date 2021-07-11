@@ -1,0 +1,11 @@
+.p-iframe-wrap {
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.p-iframe-play-btn {
+    position: absolute;
+    z-index: 50000;
+}
