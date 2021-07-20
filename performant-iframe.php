@@ -18,8 +18,8 @@ function p_iframe_fun( $atts ) {
 		  'thumb' => 'https://img.youtube.com/vi/<insert-youtube-video-id-here>/0.jpg',
 		  'link' => '',
 		  'id' => 'a3Z7zEc7AXQ',
-		  'width' => '560',
-		  'height' => '315',
+		  'width' => '560px',
+		  'height' => '315px',
 		  'play_button' => plugin_dir_url( __FILE__ ) . 'youtube-png-picture-180x180.png',
 		  'play_button_size' => '',
 		  'play_button_height' => '150px',
@@ -27,6 +27,9 @@ function p_iframe_fun( $atts ) {
 		  'rounded' => '',
 		  'border-radius' => '',
           'class_list' => 'p-iframe-wrap',
+          'time' => '',
+          'timestamp' => '',
+          'thumb_quality' => '',
 		  );
 	 extract( shortcode_atts( $defaults, $atts ) );
 
