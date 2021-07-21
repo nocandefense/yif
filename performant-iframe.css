@@ -8,6 +8,7 @@
 
 .p-iframe-wrap.rounded {
     border-radius: 8px;
+    background-color: black;
 }
 
 .p-iframe-play-btn {
