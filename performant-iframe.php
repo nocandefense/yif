@@ -21,7 +21,7 @@ function p_iframe_fun( $atts ) {
         'width' => '560px',
         'height' => '315px',
         'size' => '',
-        'play_button' => plugin_dir_url( __FILE__ ) . 'youtube-png-picture-180x180.png',
+        'play_button' => plugin_dir_url( __FILE__ ) . '/icons/youtube-play-1.png',
         'play_button_size' => '',
         'play_button_height' => '150px',
         'play_button_width' => '150px',
@@ -30,14 +30,13 @@ function p_iframe_fun( $atts ) {
         'class_list' => 'p-iframe-wrap',
         't' => '',
         'time' => '',
+        'yt_mins' => '',
+        'secs' => '',
         'timestamp' => '',
         'thumb_quality' => '',
+        'controls' => true,
     );
     extract( shortcode_atts( $defaults, $atts ) );
-
-    // if ( ) {
-
-    // }
 
     if ( preg_match( '/x/', $play_button_size ) ) {
         $btn_sizes = explode( 'x', $btn_sizes );
@@ -90,8 +89,12 @@ function p_iframe_fun( $atts ) {
             $iframe = substr_replace( $iframe, "&t={$yt_mins}m{$secs}s", strpos( $iframe, '?autoplay=1' ), 0 );
         }
     }
+
+    if ( ! $controls ) {
+        /* get last slash */
+    }
     
-    return "<figure class='{$class_list}' style='width:{$width};height:{$height};' data-attribute='{$iframe}'><img class='p-iframe-thumb' src={$thumb} width='100%' height='100%'/><img class='p-iframe-play-btn' src='{$play_button}' style='width:{$play_button_width};height={$play_button_height}' /></figure>";
+    return "<figure class='{$class_list}' style='width:{$width};height:{$height};' data-attribute='{$iframe}'><img class='p-iframe-thumb' src={$thumb} width='100%' height='100%'><div class='p-iframe-play-btn dashicons dashicons-youtube'></div></figure>";
 }
 add_shortcode( 'p_iframe', 'p_iframe_fun' );
 

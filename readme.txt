@@ -50,9 +50,9 @@ e.g.
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= What is this for? =
 
-An answer to that question.
+The main purpose of this plugin is to cause pages which have embedded YouTube videos to load faster.
 
 = What about foo bar? =
 
