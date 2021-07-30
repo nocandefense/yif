@@ -1,36 +1,20 @@
-.p-iframe-wrap {
+figure.p-iframe-wrap {
+    align-items: center;
     background-size: cover;
     display: flex;
     justify-content: center;
-    align-items: center;
     overflow: hidden;
+    cursor: pointer;
+    background-color: black;
 }
 
 .p-iframe-wrap.rounded {
     border-radius: 8px;
 }
 
-figure.p-iframe-wrap {
-    cursor: pointer;
-    background-color: black;
-}
-
-/* figure:hover .p-iframe-play-btn { */
-/*     opacity: 1; */
-/* } */
-
-/* figure::after { */
-/*     content: ''; */
-/*     width: 100px; */
-/*     height: 100px; */
-/*     background-color: white; */
-/* } */
-
 .p-iframe-play-btn {
     position: absolute;
-    z-index: 50000;
-    /* opacity: .5; */
-
+    z-index: 500000000000;
     color: black;
     font-size: 5em;
 }
