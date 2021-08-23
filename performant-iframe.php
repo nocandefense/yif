@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:     Performant iframe
+ * Plugin Name:     YIF (YouTube iframe)
  * Plugin URI:      brockcallahan.com/performant-iframe
  * Description:     Replace an image with iframe when clicked.
  * Author:          Brock Callahan
@@ -21,11 +21,12 @@ function p_iframe_fun( $atts ) {
         'width' => '560px',
         'height' => '315px',
         'size' => '',
-        'play_button' => plugin_dir_url( __FILE__ ) . '/icons/youtube-play-1.png',
+        'play_button' => plugin_dir_url( __FILE__ ) . '/icons/youtube-play-button-6.svg',
         'play_button_size' => '',
         'play_button_height' => '150px',
         'play_button_width' => '150px',
         'rounded' => '',
+        'round' => '',
         'border-radius' => '',
         'class_list' => 'p-iframe-wrap',
         't' => '',
@@ -34,7 +35,9 @@ function p_iframe_fun( $atts ) {
         'secs' => '',
         'timestamp' => '',
         'thumb_quality' => '',
-        'controls' => true,
+        'nocontrols' => 0,
+        'noc' => 0,
+        'hide_controls' => 0,
     );
     extract( shortcode_atts( $defaults, $atts ) );
 
@@ -56,7 +59,7 @@ function p_iframe_fun( $atts ) {
         $iframe = substr_replace( $iframe, $id, strpos( $iframe, '?autoplay=1' ), 0 );
     }
 
-    if ( $rounded !== '' ) {
+    if ( $rounded !== '' || $round !== '' ) {
         $class_list .= ' rounded';
     }
 
@@ -74,7 +77,11 @@ function p_iframe_fun( $atts ) {
     }
 
     /* YouTube time */
-    if ( $time !== '' ) {
+    if ( $time !== '' || $t !== '' ) {
+        if ( $t !== '' ) {
+            $time = $t;
+        }
+
         $yt_mins = jbc_parse_yt_time_qstr_mins( $time );
         $secs = jbc_parse_yt_time_qstr_secs( $time );
         $yt_mins_to_secs = jbc_mins_to_secs( $yt_mins );
@@ -90,13 +97,15 @@ function p_iframe_fun( $atts ) {
         }
     }
 
-    if ( ! $controls ) {
-        /* get last slash */
+    if ( $nocontrols || $no_controls || $noc || $hide_controls ) {
+        $iframe = substr_replace( $iframe, "controls=0&", strpos( $iframe, 'autoplay=1' ), 0 );
     }
     
-    return "<figure class='{$class_list}' style='width:{$width};height:{$height};' data-attribute='{$iframe}'><img class='p-iframe-thumb' src={$thumb} width='100%' height='100%'><div class='p-iframe-play-btn dashicons dashicons-youtube'></div></figure>";
+    return "<figure class='{$class_list}' style='width:{$width};height:{$height};' data-attribute='{$iframe}'><img class='p-iframe-thumb' src={$thumb} width='100%' height='100%'><img class='p-iframe-play-btn' src={$play_button} /></figure>";
 }
 add_shortcode( 'p_iframe', 'p_iframe_fun' );
+add_shortcode( 'p-iframe', 'p_iframe_fun' );
+add_shortcode( 'yif', 'p_iframe_fun' );
 
 /* enqueue javascript files */
 function p_iframe_enqueue() {
@@ -123,4 +132,11 @@ function jbc_parse_yt_time_qstr_mins( $t ) {
 
 function jbc_mins_to_secs( $m ) {
     return (int) $m * 60;
+}
+
+function jbc_yes_hide_controls() {
+    if ( $nocontrols || $no_controls || $noc || $hide_controls ) {
+        return true;
+    }
+    return false;
 }
