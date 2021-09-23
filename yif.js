@@ -1,6 +1,5 @@
 jQuery("document").ready(function ($) {
-    console.log("-- yif.js (loaded) --");
-    console.log("version 5");
+    console.log("-- yif.js (loaded: version 5) --");
     let myWidth = "100%";
     let myHeight = "100%";
     let domain_name = document.location.hostname;
